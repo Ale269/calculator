@@ -6,7 +6,6 @@
 }
 
 body {
-    height: 100vh;
     display: flex;
     padding: 4em 0;
     flex-direction: column;
