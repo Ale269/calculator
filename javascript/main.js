@@ -15,6 +15,7 @@ document.getElementById("number-operator").addEventListener("click", (events) =>
                 arrNumber.push(arrElement);
                 previusNumber = +arrNumber.join("");
                 previusEquation.textContent = previusNumber;
+                currentEquation.textContent = previusNumber;
 
             }else{
                 console.log("select a number");
@@ -28,12 +29,14 @@ document.getElementById("number-operator").addEventListener("click", (events) =>
                         arrNumber.push(arrElement);
                         previusNumber = +arrNumber.join("");
                         previusEquation.textContent = previusNumber;
+                        currentEquation.textContent = previusNumber;
                     }
                     else if(events.target.name === "operator"){
                         console.log("prev " + previusNumber + "; actual " + actualNumber + "; operator " + operator);
 
                         operator = events.target.value;
                         previusEquation.textContent = previusNumber + " " + operator;
+                        currentEquation.textContent = "";
                         arrNumber = [];
                     }
                     break;
@@ -45,6 +48,7 @@ document.getElementById("number-operator").addEventListener("click", (events) =>
                                 arrNumber.push(arrElement);
                                 actualNumber = +arrNumber.join("");
                                 previusEquation.textContent = previusNumber + " " + operator + " " + actualNumber;
+                                currentEquation.textContent = actualNumber;
                             }
                             else{
                                 console.log("select a number");
@@ -56,6 +60,7 @@ document.getElementById("number-operator").addEventListener("click", (events) =>
                                 arrNumber.push(arrElement);
                                 actualNumber = +arrNumber.join("");
                                 previusEquation.textContent = previusNumber + " " + operator + " " + actualNumber;
+                                currentEquation.textContent = actualNumber;
                             }
                             else if(events.target.name === "operator"){
                                 console.log("prev " + previusNumber + "; actual " + actualNumber + "; operator " + operator);
@@ -66,13 +71,17 @@ document.getElementById("number-operator").addEventListener("click", (events) =>
                                 operator = events.target.value;
                                 actualNumber = "";
                                 previusEquation.textContent = previusNumber + " " + operator;
+                                currentEquation.textContent = "";
                                 arrNumber = [];
                             }else if (events.target.name === "equal"){
                                 equation(previusNumber, actualNumber, operator);
                                 previusEquation.textContent = previusNumber + " " + operator + " " + actualNumber + " =";
+                                currentEquation.textContent = result;
                                 actualNumber = "";
+                                arrNumber = Array.from(String(result), Number);
                                 operator = "";
                                 previusNumber = result;
+                                console.log("prev " + previusNumber + "; actual " + actualNumber + "; operator " + operator);
                                 
                             }
                     }
@@ -105,6 +114,31 @@ function equation(previusNumber, actualNumber, operator) {
             break;
     }
 }
+
+
+function deleteNumber() {
+    if(actualNumber === ""){
+        arrNumber.pop();
+        previusNumber = +arrNumber.join("");
+        previusEquation.textContent = previusNumber;
+        currentEquation.textContent = previusNumber;
+    }else {
+        arrNumber.pop();
+        actualNumber = +arrNumber.join("");
+        currentEquation.textContent = previusNumber;
+    }
+}
+
+function clearAll() {
+    previusNumber = "";
+    arrNumber = [];
+    previusEquation.textContent = previusNumber;
+    currentEquation.textContent = previusNumber;
+}
+
+
+document.getElementById("deleteBTN").addEventListener("click", deleteNumber);
+document.getElementById("clearBTN").addEventListener("click", clearAll);
 
 
 
