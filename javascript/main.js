@@ -13,16 +13,16 @@ let result = "";
     function equation(previusNumber, actualNumber, operator) {
         switch(operator){
             case "x":
-                result = previusNumber * actualNumber;
+                result = Math.round(((previusNumber * actualNumber) + Number.EPSILON) * 100000000) / 100000000;
                 break;
             case "/":
-                result = previusNumber / actualNumber;
+                result = Math.round(((previusNumber / actualNumber) + Number.EPSILON) * 100000000) / 100000000;
                 break;
             case "+":
-                result = previusNumber + actualNumber;
+                result = Math.round(((previusNumber + actualNumber) + Number.EPSILON) * 100000000) / 100000000;
                 break;
             case "-":
-                result = previusNumber - actualNumber;
+                result = Math.round(((previusNumber - actualNumber) + Number.EPSILON) * 100000000) / 100000000;
                 break;
         }
     }
